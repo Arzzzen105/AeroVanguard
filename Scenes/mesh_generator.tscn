@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bijnynxewmilu"]
+
+[ext_resource type="Script" path="res://Scriptes/mesh_generator.gd" id="1_kijfg"]
+[ext_resource type="Script" path="res://Resources/spawnable_object.gd" id="2_io16r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ftsjg"]
+frequency = 0.0039
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="Resource" id="Resource_w0wh5"]
+script = ExtResource("2_io16r")
+scene_path = "res://Scenes/tree.tscn"
+count = 400
+scale_min = 0.8
+scale_max = 1.2
+
+[sub_resource type="Resource" id="Resource_mflut"]
+script = ExtResource("2_io16r")
+scene_path = "res://Scenes/rock.tscn"
+count = 100
+scale_min = 0.8
+scale_max = 1.2
+
+[node name="MeshGenerator" type="Node"]
+script = ExtResource("1_kijfg")
+size_depth = 300
+size_width = 300
+noise = SubResource("FastNoiseLite_ftsjg")
+spawnable_objects = Array[Resource]([SubResource("Resource_w0wh5"), SubResource("Resource_mflut")])

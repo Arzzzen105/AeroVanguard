@@ -21,6 +21,9 @@ func _input(event: InputEvent) -> void:
 		else:
 			menu.hide()
 			menu.active = false
+			menu.night_vision_effect.hide()
+			menu.night_vision_enabled = true
+			menu.night_vision_button.button_pressed = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if Input.is_action_just_pressed("exit_program"):
