@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var menu : Menu = $MenuLayer/Menu
+@onready var character: Player = $Character
 
 var menu_opened : bool = false
 
@@ -17,10 +18,12 @@ func _input(event: InputEvent) -> void:
 			menu.show()
 			menu.start()
 			menu.active = true
+			character.active = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			menu.hide()
 			menu.active = false
+			character.active = true
 			menu.night_vision_effect.hide()
 			menu.night_vision_enabled = true
 			menu.night_vision_button.button_pressed = false

@@ -17,6 +17,7 @@ var is_running : bool = false
 @export var camera_sensitivity : float = 0.005
 @onready var camera : Camera3D = $Camera3D
 var camera_input : Vector2
+var active : bool = true
 
 const AEROSTAT_SCENE : PackedScene = preload("res://Scenes/aerostat.tscn")
 
@@ -26,9 +27,11 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
+	if not active:
+		return
 	
 	if is_on_floor() and Input.is_action_pressed("jump"):
 		velocity.y = jump_force
@@ -65,8 +68,6 @@ func _physics_process(delta):
 	camera.rotate_x(- camera_input.y * camera_sensitivity)
 	camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
 	camera_input = Vector2.ZERO
-	
-	
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:

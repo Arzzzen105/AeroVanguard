@@ -2,7 +2,7 @@ class_name Menu extends Control
 
 @export var world : Node3D
 @export var light : DirectionalLight3D
-@export var rotation_degrees_speed : float = 2
+@export var rotation_degrees_speed : float = 1
 
 @onready var subviewport_container = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer
 @onready var viewport = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport
@@ -60,7 +60,7 @@ func change_current(num : int):
 	camera_container.global_rotation.y = aerostats[current].camera_position.global_rotation.y
 
 func change_info():
-	coordinates_label.text = "x: " + str(camera_container.global_position.x) + "\nz: " + str(camera_container.global_position.z) + "\nheight: " + str(camera_container.global_position.y)
+	coordinates_label.text = "x: " + str(int(camera_container.global_position.x)) + "\nz: " + str(int(camera_container.global_position.z)) + "\nheight: " + str(int(camera_container.global_position.y))
 
 func _on_night_vision_pressed(toggled_on: bool) -> void:
 	night_vision_enabled = !night_vision_enabled
