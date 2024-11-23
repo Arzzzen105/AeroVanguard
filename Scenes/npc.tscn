@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://y5isv2oowwor"]
+
+[ext_resource type="Script" path="res://Scriptes/npc.gd" id="1_jboul"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rrxy"]
+albedo_color = Color(1.54018e-06, 5.77569e-07, 0.608094, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ccq4p"]
+material = SubResource("StandardMaterial3D_8rrxy")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pkrm7"]
+radius = 0.4
+height = 1.8
+
+[node name="NPC" type="CharacterBody3D" groups=["npcs"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138445, -1.19209e-07, -0.0122046)
+script = ExtResource("1_jboul")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.910926, 0)
+mesh = SubResource("CapsuleMesh_ccq4p")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.910926, 0)
+shape = SubResource("CapsuleShape3D_pkrm7")
+
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="SleepTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="SleepTimer" to="." method="_on_sleep_timer_timeout"]

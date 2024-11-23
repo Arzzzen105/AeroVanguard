@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bijnynxewmilu"]
+[gd_scene load_steps=7 format=3 uid="uid://bijnynxewmilu"]
 
 [ext_resource type="Script" path="res://Scriptes/mesh_generator.gd" id="1_kijfg"]
 [ext_resource type="Script" path="res://Resources/spawnable_object.gd" id="2_io16r"]
@@ -21,9 +21,16 @@ count = 100
 scale_min = 0.8
 scale_max = 1.2
 
+[sub_resource type="Resource" id="Resource_cx04r"]
+script = ExtResource("2_io16r")
+scene_path = "res://Scenes/npc.tscn"
+count = 10
+scale_min = 1.0
+scale_max = 1.0
+
 [node name="MeshGenerator" type="Node"]
 script = ExtResource("1_kijfg")
 size_depth = 300
 size_width = 300
 noise = SubResource("FastNoiseLite_ftsjg")
-spawnable_objects = Array[Resource]([SubResource("Resource_w0wh5"), SubResource("Resource_mflut")])
+spawnable_objects = Array[Resource]([SubResource("Resource_w0wh5"), SubResource("Resource_mflut"), SubResource("Resource_cx04r")])

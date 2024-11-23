@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbsgf3vj7wkhj"]
+[gd_scene load_steps=10 format=3 uid="uid://bbsgf3vj7wkhj"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_fb7q0"]
 [ext_resource type="Shader" path="res://Shaders/night_vision.gdshader" id="2_aqiit"]
@@ -38,27 +38,15 @@ colors = PackedColorArray(0, 0.8428, 3.85046e-07, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ydqen"]
 gradient = SubResource("Gradient_mydgs")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0nw3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_romy4"]
 render_priority = 0
 shader = ExtResource("2_aqiit")
 shader_parameter/NIGHT_VISION_EFFECT = SubResource("GradientTexture1D_ydqen")
 
 [sub_resource type="QuadMesh" id="QuadMesh_rnbom"]
-material = SubResource("ShaderMaterial_r0nw3")
+material = SubResource("ShaderMaterial_romy4")
 flip_faces = true
 size = Vector2(10, 10)
-
-[sub_resource type="Gradient" id="Gradient_0v7gv"]
-offsets = PackedFloat32Array(0.557377)
-colors = PackedColorArray(0.614232, 1, 0.691578, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7evef"]
-gradient = SubResource("Gradient_0v7gv")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ue4jf"]
-render_priority = 0
-shader = ExtResource("2_aqiit")
-shader_parameter/NIGHT_VISION_EFFECT = SubResource("GradientTexture1D_7evef")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -121,15 +109,19 @@ render_target_update_mode = 4
 
 [node name="CameraContainer" type="Node3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/CameraContainer"]
+[node name="CameraRotator" type="Node3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/CameraContainer"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-current = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/CameraContainer"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0864259, 0)
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/CameraContainer/CameraRotator"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+current = true
+fov = 90.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/CameraContainer/CameraRotator/Camera3D"]
+transform = Transform3D(1, 0, 8.47033e-22, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -0.0059545, 0.00430262, -0.0864259)
 visible = false
 mesh = SubResource("QuadMesh_rnbom")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
 [node name="InfoLayer" type="CanvasLayer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
 
@@ -160,15 +152,10 @@ text = "Night Vision"
 layout_mode = 2
 text = "x: y: z:"
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/InfoLayer"]
-visible = false
-material = SubResource("ShaderMaterial_ue4jf")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/SubViewportContainer/SubViewport/InfoLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)

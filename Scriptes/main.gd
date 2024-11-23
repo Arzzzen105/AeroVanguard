@@ -2,11 +2,15 @@ extends Node3D
 
 @onready var menu : Menu = $MenuLayer/Menu
 @onready var character: Player = $Character
+@onready var coordinates: Label = $MenuLayer/CoordinatesControl/Coordinates
 
 var menu_opened : bool = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _physics_process(delta: float) -> void:
+	coordinates.text = "x: " + str(int(character.global_position.x)) + "\nz: " + str(int(character.global_position.z))
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("open_menu"):

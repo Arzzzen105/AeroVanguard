@@ -74,6 +74,9 @@ func _unhandled_input(event):
 		camera_input = event.relative
 
 func _input(event: InputEvent) -> void:
+	if not active:
+		return
+	
 	if Input.is_action_just_pressed("iterract"):
 		put_aerostat()
 	
