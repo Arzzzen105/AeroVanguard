@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://camwvvuksmvtr"]
+[gd_scene load_steps=14 format=3 uid="uid://camwvvuksmvtr"]
 
 [ext_resource type="Script" path="res://Scriptes/main.gd" id="1_351hh"]
 [ext_resource type="Texture2D" uid="uid://cqubdkwj11v1i" path="res://Models/Grass.jpg" id="1_jentx"]
 [ext_resource type="PackedScene" uid="uid://bijnynxewmilu" path="res://Scenes/mesh_generator.tscn" id="2_8l73q"]
 [ext_resource type="ArrayMesh" uid="uid://cndcxj6gf0smr" path="res://Models/Terrain.obj" id="2_jpo60"]
 [ext_resource type="PackedScene" uid="uid://bpiike5mu84hd" path="res://Scenes/character.tscn" id="4_0l5gc"]
+[ext_resource type="PackedScene" uid="uid://cyhlh60aua8h6" path="res://computer.tscn" id="5_qe0rx"]
 [ext_resource type="PackedScene" uid="uid://bbsgf3vj7wkhj" path="res://Scenes/menu.tscn" id="6_yqno4"]
 
 [sub_resource type="Gradient" id="Gradient_psncl"]
@@ -39,7 +40,9 @@ script = ExtResource("1_351hh")
 collision_layer = 3
 collision_mask = 0
 
-[node name="MeshGenerator" parent="StaticWorld" instance=ExtResource("2_8l73q")]
+[node name="MeshGenerator" parent="StaticWorld" node_paths=PackedStringArray("computer", "world") instance=ExtResource("2_8l73q")]
+computer = NodePath("../Computer")
+world = NodePath("../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="StaticWorld"]
 environment = SubResource("Environment_myqck")
@@ -54,9 +57,21 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, -40, 0)
 material_override = SubResource("StandardMaterial3D_x5sfa")
 mesh = ExtResource("2_jpo60")
 
-[node name="Character" parent="." node_paths=PackedStringArray("aerostats_container", "menu") instance=ExtResource("4_0l5gc")]
+[node name="Computer" parent="StaticWorld" node_paths=PackedStringArray("world") instance=ExtResource("5_qe0rx")]
+world = NodePath("../..")
+
+[node name="Character" parent="." node_paths=PackedStringArray("aerostats_container", "menu", "computer") instance=ExtResource("4_0l5gc")]
 aerostats_container = NodePath("../Aerostats")
 menu = NodePath("../MenuLayer/Menu")
+computer = NodePath("../StaticWorld/Computer")
+max_speed = 4.0
+acceleration = 20.0
+braking = 20.0
+air_acceleration = 4.0
+jump_force = 5.0
+gravity_modifier = 1.5
+max_sprint_speed = 6.0
+camera_sensitivity = 0.005
 
 [node name="Aerostats" type="Node3D" parent="."]
 

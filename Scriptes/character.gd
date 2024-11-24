@@ -2,6 +2,7 @@ class_name Player extends CharacterBody3D
 
 @export var aerostats_container : Node3D
 @export var menu : Menu
+@export var computer : Computer
 
 @export_group("Movement")
 @export var max_speed : float = 4.0
@@ -86,3 +87,4 @@ func put_aerostat():
 	aerostat.position = position
 	aerostat.rotation.y = rotation.y + PI/2
 	menu.add_aerostat(aerostat)
+	computer.add_camera(aerostat)

@@ -33,4 +33,4 @@ script = ExtResource("1_kijfg")
 size_depth = 300
 size_width = 300
 noise = SubResource("FastNoiseLite_ftsjg")
-spawnable_objects = Array[Resource]([SubResource("Resource_w0wh5"), SubResource("Resource_mflut"), SubResource("Resource_cx04r")])
+spawnable_objects = Array[ExtResource("2_io16r")]([SubResource("Resource_w0wh5"), SubResource("Resource_mflut"), SubResource("Resource_cx04r")])

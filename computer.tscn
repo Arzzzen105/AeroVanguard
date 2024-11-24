@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyhlh60aua8h6"]
+
+[ext_resource type="Script" path="res://Scriptes/computer.gd" id="1_7wew6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3gdhw"]
+size = Vector3(2, 3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jli45"]
+albedo_color = Color(0.099986, 0.099986, 0.099986, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_knu5l"]
+material = SubResource("StandardMaterial3D_jli45")
+size = Vector3(2.2, 1.4, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvjkw"]
+size = Vector3(1.5, 3, 0.3)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f5my5"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Computer" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00684706, 0.0276285, 0.000867844)
+script = ExtResource("1_7wew6")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.767394, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.940652, 0)
+mesh = SubResource("BoxMesh_3gdhw")
+
+[node name="ScreenMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.988667, -0.150122, 0, 0.150122, 0.988667, 0, 1.73185, 0.360859)
+mesh = SubResource("BoxMesh_knu5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962952, 0.00378418)
+shape = SubResource("BoxShape3D_bvjkw")
+
+[node name="Screen" type="Sprite3D" parent="."]
+transform = Transform3D(0.384652, 0, 0, 0, 0.238983, -0.150364, 0, 0.0363476, 0.988631, 0, 1.72505, 0.425115)
+texture = SubResource("ViewportTexture_f5my5")
+
+[node name="ScreenLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74343, 0.615436)
+light_energy = 1.646
+omni_range = 2.897
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
+
+[node name="Control" type="Control" parent="SubViewport/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="SubViewport/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewport/CanvasLayer/Control/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Screen1" type="SubViewport" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera" type="Camera3D" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer/Screen1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+current = true
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="SubViewport/CanvasLayer/Control/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Screen2" type="SubViewport" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer2"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera" type="Camera3D" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer2/Screen2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+current = true
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="SubViewport/CanvasLayer/Control/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Screen3" type="SubViewport" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer3"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera" type="Camera3D" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer3/Screen3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+current = true
+
+[node name="SubViewportContainer4" type="SubViewportContainer" parent="SubViewport/CanvasLayer/Control/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Screen4" type="SubViewport" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer4"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera" type="Camera3D" parent="SubViewport/CanvasLayer/Control/GridContainer/SubViewportContainer4/Screen4"]
+transform = Transform3D(1, -0.000214632, -0.000225961, 0.000225466, -0.00228272, 0.999997, -0.000215153, -0.999997, -0.00228268, 0, 0, 0)
+current = true

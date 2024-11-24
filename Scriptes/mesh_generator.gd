@@ -3,8 +3,11 @@ class_name MeshGenerator extends Node
 @export var size_depth : int = 100
 @export var size_width : int = 100
 @export var mesh_resolution : int = 2
+@export var computer : Computer
 
 @export var noise : FastNoiseLite
+
+@export var world : Node3D
 
 @export var spawnable_objects : Array[SpawnableObject]
 
@@ -15,7 +18,6 @@ func _ready() -> void:
 	generate()
 
 func generate():
-	
 	noise.seed = randi()
 	rng.seed = noise.seed
 	
@@ -56,7 +58,8 @@ func generate():
 			scene.scale *= rng.randf_range(object.scale_min, object.scale_max)
 			add_child(scene)
 			scene.global_position = get_rand_coordinates()
-			
+	
+	computer.global_position = Vector3(-20, get_noise_y(-20, 0), 0)
 
 func get_noise_y(x, z) -> float:
 	return noise.get_noise_2d(x, z) * 25
